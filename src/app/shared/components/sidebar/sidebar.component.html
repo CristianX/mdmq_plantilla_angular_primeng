@@ -1,0 +1,104 @@
+<div
+  class="sidebar-area bg-white active"
+  [ngClass]="{'active': isSidebarToggled}"
+  [class.component-dark-theme]="themeService.isDark()"
+  [class.dark-sidebar]="themeService.isSidebarDark()"
+  [class.right-sidebar]="themeService.isRightSidebar()"
+  [class.hide-sidebar]="themeService.isHideSidebar()"
+  [class.card-borderd-theme]="themeService.isCardBorder()"
+  [class.rtl-enabled]="themeService.isRTLEnabled()"
+  >
+  <div class="logo bg-white">
+    <a routerLink="/" class="d-flex align-items-center">
+      @if (imgEscudo) {
+        <img [src]="imgEscudo" alt="logo-escudo" style="height: 50px; width: auto;">
+      } @else {
+        <img src="assets/images/icons/logo-icon.png" alt="logo-icon">
+      }
+      <span class="fw-semibold">SIEM</span>
+    </a>
+  </div>
+  <div
+    (click)="toggle()"
+    class="burger-menu"
+    [ngClass]="{'active': isSidebarToggled}"
+    >
+    <span class="top-bar"></span>
+    <span class="middle-bar"></span>
+    <span class="bottom-bar"></span>
+  </div>
+  <ng-scrollbar visibility="hover">
+    <div class="sidebar-inner">
+      <div class="sidebar-menu">
+        <mat-accordion>
+          <a routerLink="/starter" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="material-symbols-outlined">
+              star_border
+            </i>
+            <span class="title">
+              Inicio
+            </span>
+          </a>
+
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <i class="material-symbols-outlined">
+                  lock_open
+                </i>
+                <span class="title">
+                  Administración
+                </span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="sidebar-sub-menu">
+              <li class="sidemenu-item">
+                <a routerLink="/admin/administracion/usuarios" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                  Usuarios
+                </a>
+              </li>
+              <li class="sidemenu-item">
+                <a routerLink="/admin/administracion/roles" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                  Roles
+                </a>
+              </li>
+              <li class="sidemenu-item">
+                <a routerLink="/admin/administracion/perfiles" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                  Perfiles
+                </a>
+              </li>
+            </ul>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <i class="material-symbols-outlined">
+                  lock_open
+                </i>
+                <span class="title">
+                  Recomendación
+                </span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul class="sidebar-sub-menu">
+              <li class="sidemenu-item">
+                <a routerLink="/admin/recomendacion" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                  Componente
+                </a>
+              </li>
+
+            </ul>
+          </mat-expansion-panel>
+
+          <a (click)="logout()" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <i class="material-symbols-outlined">
+              logout
+            </i>
+            <span class="title">Salir</span>
+          </a>
+        </mat-accordion>
+      </div>
+    </div>
+  </ng-scrollbar>
+</div>

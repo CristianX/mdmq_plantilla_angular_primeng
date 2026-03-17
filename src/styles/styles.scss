@@ -1,0 +1,211 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use "./utilities" as *;
+@use "./ui-kit" as *;
+@use "./typography" as *;
+@use "./rtl" as *;
+@use "./dark" as *;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.elevation-classes();
+@include mat.app-background();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$siem-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$siem-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$siem-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$siem-theme: mat.m2-define-light-theme((
+    color: (
+        primary: $siem-primary,
+        accent: $siem-accent,
+        warn: $siem-warn,
+    )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($siem-theme);
+
+/* You can add global styles to this file, and also import other style files */
+:root {
+    --fontFamily: 'Outfit', sans-serif;
+    --siemColor: #1B77BB;
+    --primaryColor: #796df6;
+    --dangerColor: #e74c3c;
+    --infoColor: #00cae3;
+    --backgroundColor: #E7EFFD;
+    --warningColor: #ffb264;
+    --successColor: #2ed47e;
+    --blackColor: #475569;
+    --whiteColor: #ffffff;
+    --blueColor: #1B77BB;
+    --bodyColor: #919aa3;
+    --transition: .5s;
+    --fontSize: 16px;
+    --borderBoxShadow: rgba(0, 0, 0, .05) 0px 6px 24px 0px, rgba(0, 0, 0, .08) 0px 0px 0px 1px;
+    
+    // Variables CSS para accordion (tema claro)
+    --mat-expansion-container-background-color: var(--whiteColor);
+    --mat-expansion-container-text-color: var(--blackColor);
+    --mat-expansion-header-text-color: var(--siemColor);
+    --mat-expansion-header-description-color: var(--bodyColor);
+    --mat-expansion-header-indicator-color: var(--siemColor);
+    --mat-expansion-actions-divider-color: rgba(27, 119, 187, 0.12);
+    --mat-expansion-header-hover-state-layer-color: rgba(27, 119, 187, 0.04);
+    --mat-expansion-header-focus-state-layer-color: var(--backgroundColor);
+    --mat-expansion-header-disabled-state-text-color: rgba(27, 119, 187, 0.26);
+}
+
+// Estilos específicos para accordion
+.mat-expansion-panel {
+    background-color: var(--mat-expansion-container-background-color);
+    color: var(--mat-expansion-container-text-color);
+    
+    .mat-expansion-panel-header {
+        color: var(--mat-expansion-header-text-color);
+        
+        .mat-panel-title {
+            color: var(--mat-expansion-header-text-color);
+            font-weight: 500;
+        }
+        
+        .mat-panel-description {
+            color: var(--mat-expansion-header-description-color);
+        }
+        
+        .mat-expansion-indicator::after {
+            color: var(--mat-expansion-header-indicator-color);
+        }
+        
+        &:hover {
+            background-color: var(--mat-expansion-header-hover-state-layer-color);
+        }
+        
+        &:focus {
+            background-color: var(--mat-expansion-header-focus-state-layer-color);
+        }
+    }
+    
+    &.mat-expanded .mat-expansion-panel-header {
+        .mat-panel-title {
+            color: var(--siemColor);
+            font-weight: 600;
+        }
+    }
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    color: var(--blackColor);
+    background-color: #eff3f9;
+    font: {
+        weight: 400;
+        size: var(--fontSize);
+        family: var(--fontFamily);
+    };
+}
+a {
+    transition: var(--transition);
+    color: var(--blackColor);
+    text-decoration: none;
+    outline: 0 !important;
+
+    &:hover {
+        text-decoration: none;
+        color: var(--siemColor);
+    }
+}
+.d-table {
+    width: 100%;
+    height: 100%;
+
+    &-cell {
+        vertical-align: middle;
+    }
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+input {
+    font: {
+        family: var(--fontFamily);
+        size: var(--fontSize);
+    };
+}
+button {
+    font: {
+        family: var(--fontFamily) !important;
+        size: var(--fontSize) !important;
+    };
+}
+.mb-25 {
+    margin-bottom: 25px !important;
+}
+
+// Local CSS modules already loaded above via @use
+
+/* Max width 767px */
+@media only screen and (max-width : 767px) {
+
+    body {
+        font-size: 14px;
+    }
+    .mb-25 {
+        margin-bottom: 15px !important;
+    }
+    button {
+        font-size: 14px !important;
+    }
+
+}
+
+/* Min width 576px to Max width 767px */
+@media only screen and (min-width : 576px) and (max-width : 767px) {
+
+    .mb-25 {
+        margin-bottom: 20px !important;
+    }
+
+}
+
+/* Min width 768px to Max width 991px */
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+    body {
+        font-size: 15px;
+    }
+    button {
+        font-size: 15px !important;
+    }
+
+}
+
+/* Min width 992px to Max width 1199px */
+@media only screen and (min-width : 992px) and (max-width : 1199px) {}
+
+/* Min width 1200px to Max width 1399px */
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
+
+/* Min width 1600px */
+@media only screen and (min-width: 1600px) {}
+
+mat-label {
+    font-size: 13px;
+}

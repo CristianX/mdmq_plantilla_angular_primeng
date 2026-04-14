@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { MaterialModule } from '../../../../shared/material/material.module';
 import { CustomizerSettingsService } from '../../../../shared/components/customizer-settings/customizer-settings.service';
 import { FormBuilder, UntypedFormGroup, UntypedFormControl, AbstractControl, FormGroup, Validators } from '@angular/forms';
+import { PredioDatosBasicosComponent } from '../../administracion/components/predio-datos-basicos/predio-datos-basicos.component';
 
 import { Subscription } from 'rxjs';
 import { CustomValidators } from '../../../../shared/validators/custom-validators';
 
 @Component({
     selector: 'app-informacion-general',
-    imports: [MaterialModule],
+    standalone: true,
+    imports: [MaterialModule, PredioDatosBasicosComponent],
     templateUrl: './informacion-general.component.html',
     styleUrl: './informacion-general.component.scss'
 })

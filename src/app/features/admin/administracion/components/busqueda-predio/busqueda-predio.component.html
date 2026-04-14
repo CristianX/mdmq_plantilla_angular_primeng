@@ -1,0 +1,26 @@
+<mat-card class="siem-card mb-25 border-radius bg-white d-block">
+  <ng-container [formGroup]="form">
+    <div class="row">
+      <div class="col-sm-12">
+
+        <mat-form-field class="mb-5">
+          <mat-label>Número de predio</mat-label>
+
+          <input matInput formControlName="numeroPredio" type="number" maxlength="10">
+
+          <button mat-icon-button matSuffix color="primary" type="button" (click)="buscarPredio()">
+            <mat-icon>search</mat-icon>
+          </button>
+
+          @if (f['numeroPredio'].touched && f['numeroPredio'].invalid) {
+            <mat-error>
+              {{ f['numeroPredio'].errors?.['required'] ? 'El número de predio es requerido' : '' }}
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+      </div>
+    </div>
+  </ng-container>
+</mat-card>

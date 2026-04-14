@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { InternalErrorComponent } from './shared/common/internal-error/internal-error.component';
+import { InternalErrorComponent } from './shared/components/internal-error/internal-error.component';
 import { adminGuard } from './core/guards/admin.guard';
 
 export const APP_ROUTES: Routes = [

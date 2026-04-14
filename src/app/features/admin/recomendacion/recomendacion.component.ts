@@ -3,7 +3,7 @@ import { MaterialModule } from '../../../shared/material/material.module';
 import { UntypedFormBuilder, UntypedFormGroup, AbstractControl, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 
-import { CustomizerSettingsService } from '../../../shared/common/customizer-settings/customizer-settings.service';
+import { CustomizerSettingsService } from '../../../shared/components/customizer-settings/customizer-settings.service';
 import { CustomValidators } from '../../../shared/validators/custom-validators';
 import { InformacionGeneralComponent } from '../recomendacion/informacion-general/informacion-general.component'
 

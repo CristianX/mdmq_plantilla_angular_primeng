@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { CommonModule, Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { RouterOutlet, Router, NavigationCancel, NavigationEnd } from '@angular/router';
-import { CustomizerSettingsService } from '../../../shared/common/customizer-settings/customizer-settings.service';
-import { ToggleService } from '../../../shared/common/sidebar/toggle.service';
-import { FooterComponent } from '../../../shared/common/footer/footer.component';
-import { HeaderComponent } from '../../../shared/common/header/header.component';
-import { SidebarComponent } from '../../../shared/common/sidebar/sidebar.component';
+import { CustomizerSettingsService } from '../../shared/components/customizer-settings/customizer-settings.service';
+import { ToggleService } from '../../shared/components/sidebar/toggle.service';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { HeaderComponent } from '../../shared/components/header/header.component';
+import { SidebarComponent } from '../../shared/components/sidebar/sidebar.component';
 
 
 @Component({

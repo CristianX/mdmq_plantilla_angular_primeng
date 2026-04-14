@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../../../shared/material/material.module';
-import { CustomizerSettingsService } from '../../../../shared/common/customizer-settings/customizer-settings.service';
+import { CustomizerSettingsService } from '../../../../shared/components/customizer-settings/customizer-settings.service';
 import { FormBuilder, UntypedFormGroup, UntypedFormControl, AbstractControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';

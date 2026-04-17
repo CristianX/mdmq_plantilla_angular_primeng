@@ -1,0 +1,66 @@
+.roles-container {
+    // Las tarjetas azules siempre son azules
+    .bg-siem {
+        background-color: var(--siemColor) !important;
+    }
+
+    // Mantener las tarjetas de resumen en el mismo orden/posición
+    // sin importar el ancho de la ventana.
+    .roles-summary {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 25px;
+
+        // Evita los gutters/márgenes negativos del grid (.row)
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    // Neutraliza el comportamiento de columnas (col-*) dentro del resumen
+    .roles-summary > [class*="col-"] {
+        width: auto;
+        max-width: none;
+        padding-left: 0;
+        padding-right: 0;
+        min-width: 0;
+    }
+}
+
+.p-datatable-siem {
+    // Modo Claro (Default)
+    .p-datatable-thead > tr > th {
+        background-color: var(--backgroundColor) !important;
+        color: var(--blackColor) !important;
+    }
+
+    .p-datatable-tbody > tr > td {
+        background-color: var(--whiteColor) !important;
+        color: var(--bodyColor) !important;
+    }
+
+    // Modo Oscuro (según la clase aplicada en admin-page)
+    .dark-theme & {
+        background-color: #1b232d !important;
+
+        .p-datatable-thead > tr > th {
+            background-color: #131920 !important;
+            color: var(--whiteColor) !important;
+        }
+
+        .p-datatable-tbody > tr > td {
+            background-color: #1b232d !important;
+            color: rgba(255, 255, 255, 0.7) !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+        }
+
+        // Elimina el fondo blanco de la fila
+        .p-datatable-tbody > tr {
+            background-color: #1b232d !important;
+        }
+
+        .p-paginator {
+            background-color: #1b232d !important;
+            border-color: rgba(255, 255, 255, 0.09) !important;
+        }
+    }
+}

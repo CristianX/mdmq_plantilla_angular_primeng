@@ -216,3 +216,159 @@ mat-label {
     font-size: 13px;
 }
 
+// PrimeNG: tablas alineadas al look&feel global (variables en :root)
+// Se activa agregando `styleClass="p-datatable-siem"` al `<p-table>`.
+.p-datatable.p-datatable-siem {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--borderBoxShadow);
+    background-color: transparent;
+
+    .p-datatable-header {
+        border: 0;
+        background: transparent;
+        padding: 15px 20px;
+    }
+
+    .p-datatable-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: var(--whiteColor);
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #ebebeb;
+        }
+    }
+
+    .p-datatable-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-family: var(--fontFamily);
+        font-size: var(--fontSize);
+    }
+
+    .p-datatable-thead > tr > th {
+        background-color: #e7effd;
+        color: var(--blackColor);
+        letter-spacing: normal;
+        line-height: initial;
+        white-space: nowrap;
+        text-align: left;
+        padding: 20px;
+        border: none;
+        font-weight: 500;
+    }
+
+    .p-datatable-tbody > tr > td {
+        background-color: var(--whiteColor);
+        border-bottom: 1px dashed #e0e0e0;
+        color: var(--bodyColor);
+        letter-spacing: normal;
+        line-height: initial;
+        white-space: nowrap;
+        text-align: left;
+        padding: 20px;
+    }
+
+    .p-datatable-tbody > tr:hover > td {
+        background-color: rgba(27, 119, 187, 0.04);
+    }
+
+    .p-paginator {
+        border: 0;
+        background: transparent;
+        padding: 15px 20px;
+
+        .p-paginator-pages .p-paginator-page,
+        .p-paginator-first,
+        .p-paginator-prev,
+        .p-paginator-next,
+        .p-paginator-last {
+            width: 35px;
+            height: 35px;
+            min-width: 35px;
+            border-radius: 3px;
+            color: var(--bodyColor);
+            border: 1px solid #e0e0e0;
+            background-color: var(--whiteColor);
+        }
+
+        .p-paginator-pages .p-paginator-page.p-highlight {
+            color: var(--whiteColor);
+            border-color: var(--siemColor);
+            background-color: var(--siemColor);
+        }
+    }
+
+    .p-inputtext {
+        border: 1px solid #dae0ec;
+        border-radius: 5px;
+        background-color: transparent;
+        color: var(--blackColor);
+        font-family: var(--fontFamily);
+    }
+
+    .p-inputtext.p-inputtext-sm {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+// Variante dark para las tablas SIEM (activada por `.dark-theme` en el layout)
+.dark-theme {
+    .p-datatable.p-datatable-siem {
+        .p-datatable-wrapper {
+            &::-webkit-scrollbar-track {
+                background-color: #1b232d;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.12);
+            }
+        }
+
+        .p-datatable-thead > tr > th {
+            background-color: #131920;
+            color: var(--whiteColor);
+        }
+
+        .p-datatable-tbody > tr > td {
+            background-color: #1b232d;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .p-datatable-tbody > tr:hover > td {
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .p-paginator {
+            .p-paginator-pages .p-paginator-page,
+            .p-paginator-first,
+            .p-paginator-prev,
+            .p-paginator-next,
+            .p-paginator-last {
+                border-color: rgba(255, 255, 255, 0.12);
+                background-color: #1b232d;
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+
+        .p-inputtext {
+            border-color: rgba(255, 255, 255, 0.12);
+            background-color: rgba(255, 255, 255, 0.07);
+            color: var(--whiteColor);
+        }
+
+        .p-input-icon-left > i {
+            color: rgba(255, 255, 255, 0.65);
+        }
+    }
+}
+

@@ -1,0 +1,15 @@
+// Scope local: evita afectar tarjetas/tablas globalmente.
+.usuarios-container {
+    .card {
+        background-color: var(--whiteColor) !important;
+        transition: background-color 0.3s ease;
+    }
+}
+
+.dark-theme {
+    .usuarios-container {
+        .card {
+            background-color: #1b232d !important;
+        }
+    }
+}

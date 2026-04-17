@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 
 export interface BusquedaPredioPayload {
-  numeroPredio: number | null;
+  numeroPredio: string;
 }
 
 @Component({
@@ -53,6 +53,8 @@ export class BusquedaPredioComponent {
     }
 
     const valor = this.form.get('numeroPredio')?.value;
-    this.buscar.emit({ numeroPredio: valor ?? null });
+    this.buscar.emit({ numeroPredio: String(valor ?? '') });
   }
+
+  
 }

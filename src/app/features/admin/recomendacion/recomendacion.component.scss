@@ -1,0 +1,13 @@
+.mat-mdc-outlined-button.siem {
+  border: 2px solid var(--siemColor);
+  color: var(--siemColor);
+  background-color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--siemColor);
+    color: white;
+  }
+}

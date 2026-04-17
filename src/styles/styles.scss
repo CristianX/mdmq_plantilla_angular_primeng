@@ -149,6 +149,12 @@ input {
         size: var(--fontSize);
     };
 }
+
+/* Hide browser built-in password reveal/clear buttons (commonly causes double-eye with custom toggles) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
 button {
     font: {
         family: var(--fontFamily) !important;
@@ -209,3 +215,4 @@ button {
 mat-label {
     font-size: 13px;
 }
+

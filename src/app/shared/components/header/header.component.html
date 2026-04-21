@@ -1,70 +1,87 @@
 <header
-    class="header-area bg-blue border-radius transition"
+    class="header-area transition"
     [ngClass]="{'active': isSidebarToggled, 'sticky': isSticky}"
     [class.component-dark-theme]="themeService.isDark()"
-    [class.right-sidebar]="themeService.isRightSidebar()"
     [class.hide-sidebar]="themeService.isHideSidebar()"
-    [class.dark-header]="themeService.isHeaderDark()"
-    [class.card-borderd-theme]="themeService.isCardBorder()"
     [class.rtl-enabled]="themeService.isRTLEnabled()"
 >
-    <div class="header-content d-md-flex align-items-center justify-content-between">
+    <div class="header-content d-flex align-items-center justify-content-between">
         <div class="header-left-side d-flex align-items-center">
             <div
                 class="burger-menu cursor-pointer transition d-xl-none"
                 [ngClass]="{'active': isSidebarToggled}"
                 (click)="toggle()"
             >
-                <span class="top-bar d-block bg-white transition"></span>
-                <span class="middle-bar d-block bg-white transition"></span>
-                <span class="bottom-bar d-block bg-white transition"></span>
-                
+                <span class="top-bar d-block transition"></span>
+                <span class="middle-bar d-block transition"></span>
+                <span class="bottom-bar d-block transition"></span>
             </div>
-            
         </div>
-        <ul class="header-right-side d-flex align-items-center mt-0 mb-0 pl-0 list-unstyled">
+
+        <ul class="header-right-side d-flex align-items-center mt-0 mb-0 pl-0 list-unstyled gap-2">
             
             <li>
                 <button
                     mat-button
-                    class="dark-swtich-btn"
+                    class="ghost-button icon-only"
                     (click)="toggleTheme()"
+                    [title]="themeService.isDark() ? 'Modo Claro' : 'Modo Oscuro'"
                 >
-                    <i class="material-symbols-outlined">
-                        dark_mode
+                    <i class="material-symbols-outlined text-white">
+                        {{ themeService.isDark() ? 'light_mode' : 'dark_mode' }}
                     </i>
                 </button>
             </li>
             
             <li>
-                <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-menu-btn">
-                    <img src="assets/images/admin.png" alt="profile-image">
-                    <span class="status d-inline-block rounded-circle position-absolute"></span>
+                <button mat-button [matMenuTriggerFor]="profileMenu" class="ghost-button profile-capsule">
+                    <div class="d-flex align-items-center">
+                        <img src="assets/images/admin.png" alt="profile" class="rounded-circle avatar-small">
+                        <span class="user-name-text d-none d-md-inline ms-2 text-white fw-medium">{{ loggedUser }}</span>
+                        <i class="pi pi-chevron-down text-white ms-2 small-icon"></i>
+                    </div>
                 </button>
-                <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
-                    <div
-                        [class.dark-menu]="themeService.isDark() || themeService.isHeaderDark()"
-                    >
-                        <div class="menu-header d-flex align-items-center">
-                            <img src="assets/images/admin.png" alt="profile-image">
-                            <div class="title">
-                                <a routerLink="/my-profile" class="d-inline-block fw-medium">
-                                    {{loggedUser}}
-                                </a>
-                                <span class="designation d-block text-body">
-                                    {{nombreRol}}
-                                </span>
+
+                <mat-menu class="modern-profile-menu" #profileMenu="matMenu" xPosition="before">
+                    <div class="menu-container" [class.dark-menu]="themeService.isDark()">
+                        
+                        <div class="menu-header d-flex align-items-center p-3">
+                            <div class="position-relative">
+                                <img src="assets/images/admin.png" alt="user" class="avatar-large rounded-circle">
+                                <span class="status-dot online"></span>
+                            </div>
+                            <div class="user-info ms-3">
+                                <span class="d-block fw-bold text-dark-blue name">{{loggedUser}}</span>
+                                <span class="designation text-muted small">{{nombreRol}}</span>
                             </div>
                         </div>
-                        <ul class="menu-body pl-0 mb-0 mt-0 list-unstyled">
-                            <li class="position-relative transition fw-medium">
-                                <i class="material-symbols-outlined">
-                                    logout
-                                </i>
-                                Logout
-                                <a (click)="logout()" class="link-btn d-block position-absolute"></a>
-                            </li>
-                        </ul>
+
+                        <div class="menu-divider"></div>
+
+                        <div class="menu-body p-2">
+                            <a routerLink="/my-profile" class="menu-item d-flex align-items-center p-2 rounded-3 text-decoration-none">
+                                <div class="icon-box me-3">
+                                    <i class="material-symbols-outlined">person</i>
+                                </div>
+                                <span>Mi Perfil</span>
+                            </a>
+
+                            <a routerLink="/settings" class="menu-item d-flex align-items-center p-2 rounded-3 text-decoration-none">
+                                <div class="icon-box me-3">
+                                    <i class="material-symbols-outlined">settings</i>
+                                </div>
+                                <span>Configuración</span>
+                            </a>
+                        </div>
+
+                        <div class="menu-divider"></div>
+
+                        <div class="menu-footer p-2">
+                            <button (click)="logout()" class="logout-btn d-flex align-items-center justify-content-center w-100 p-2 rounded-3 border-0">
+                                <i class="material-symbols-outlined me-2">logout</i>
+                                <span>Cerrar Sesión</span>
+                            </button>
+                        </div>
                     </div>
                 </mat-menu>
             </li>

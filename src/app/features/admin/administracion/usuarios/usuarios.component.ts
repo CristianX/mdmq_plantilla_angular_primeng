@@ -4,18 +4,28 @@ import { FormsModule } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged } from 'rxjs';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button'; // Importante para los iconos de botones
 import { UserAdminService } from '../../../../core/services/user-admin.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-usuarios',
   standalone: true,
-  imports: [CommonModule, FormsModule, TableModule, InputTextModule],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    TableModule, 
+    InputTextModule, 
+    ButtonModule,
+    MatCardModule
+  ],
   templateUrl: './usuarios.component.html',
   styleUrl: './usuarios.component.scss',
-  encapsulation: ViewEncapsulation.None // <--- Fundamental
+  encapsulation: ViewEncapsulation.None
 })
 export class UsuariosComponent implements OnInit {
   private userService = inject(UserAdminService);
+  
   users: any[] = [];
   loading: boolean = false;
   searchTerm: string = '';
@@ -23,26 +33,30 @@ export class UsuariosComponent implements OnInit {
 
   ngOnInit() {
     this.loadUsers();
+    
+    // Lógica de búsqueda optimizada (debounce)
     this.searchSubject.pipe(
-      debounceTime(500), 
+      debounceTime(400), 
       distinctUntilChanged()
-    ).subscribe((term: string) => this.loadUsers(term));
+    ).subscribe((term: string) => {
+      this.loadUsers(term);
+    });
   }
 
-  onSearchChange(event: Event) {
-    const target = event.target as HTMLInputElement;
-    this.searchSubject.next(target.value);
+  onSearchChange(event: any) {
+    const value = event.target.value;
+    this.searchSubject.next(value);
   }
 
   loadUsers(term: string = '') {
     this.loading = true;
     this.userService.getUsers(term).subscribe({
-      next: (data: any) => {
+      next: (data) => {
         this.users = data;
         this.loading = false;
       },
-      error: (err: any) => {
-        console.error('Error:', err);
+      error: (err) => {
+        console.error('Error al cargar usuarios:', err);
         this.loading = false;
       }
     });

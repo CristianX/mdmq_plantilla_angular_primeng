@@ -1,57 +1,82 @@
 <div class="usuarios-container">
-    <div class="card mb-25">
-        <div class="card-body">
-            <p-table 
-                [value]="users" 
-                [loading]="loading" 
-                [paginator]="true" 
-                [rows]="10" 
-                responsiveLayout="scroll"
-                styleClass="p-datatable-siem"
-            >
-                <ng-template pTemplate="caption">
-                    <div class="d-flex justify-content-end">
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search"></i>
-                            <input 
-                                pInputText 
-                                type="text" 
-                                [(ngModel)]="searchTerm" 
-                                (input)="onSearchChange($event)" 
-                                placeholder="Buscar usuarios..." 
-                                class="p-inputtext-sm"
-                            />
-                        </span>
-                    </div>
-                </ng-template>
+    <mat-card class="siem-card mb-25 border-radius bg-white d-block">
+        <div class="table-header">
+            <h5 class="table-title">Gestion de Usuarios</h5>
 
+            <div class="search-box">
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        [(ngModel)]="searchTerm"
+                        (input)="onSearchChange($event)"
+                        placeholder="Buscar por nombre o correo..."
+                        class="p-inputtext-sm search-input"
+                    />
+                </span>
+            </div>
+        </div>
+
+        <p-table
+            [value]="users"
+            [loading]="loading"
+            [paginator]="true"
+            [rows]="10"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-siem"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords}"
+        >
             <ng-template pTemplate="header">
                 <tr>
                     <th>Usuario</th>
-                    <th>Nombre de Usuario</th>
+                    <th>Nombre y Contacto</th>
                     <th>Departamento</th>
-                    <th>Roles</th>
-                    <th>Estado</th>
-                    
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="body" let-user>
                 <tr>
-                    <td><strong>{{ user.username }}</strong></td>
-                    <td>{{ user.firstName }}</td>
-                    <td>{{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.status }}</td>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                {{ user.username.charAt(0).toUpperCase() }}
+                            </div>
+                            <span class="username-text">{{ user.username }}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex flex-column">
+                            <span class="full-name">{{ user.firstName }} {{ user.lastName }}</span>
+                            <small class="text-muted">{{ user.email }}</small>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="dept-tag">{{ user.department || 'General' }}</span>
+                    </td>
+                    <td class="text-center">
+                        <span [class]="'status-badge ' + (user.status === 'Activo' ? 'status-active' : 'status-inactive')">
+                            {{ user.status }}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded p-button-sm mr-2" title="Editar"></button>
+                        <button pButton icon="pi pi-trash" class="p-button-text p-button-danger p-button-rounded p-button-sm" title="Eliminar"></button>
+                    </td>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="5" class="text-center p-4">No se encontraron usuarios.</td>
+                    <td colspan="5" class="text-center py-5">
+                        <i class="pi pi-users text-muted mb-2" style="font-size: 2rem"></i>
+                        <p class="text-muted">No se encontraron registros de usuarios.</p>
+                    </td>
                 </tr>
             </ng-template>
-            </p-table>
-        </div>
-    </div>
+        </p-table>
+    </mat-card>
 </div>

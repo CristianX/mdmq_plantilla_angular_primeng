@@ -1,6 +1,6 @@
 import { NgClass } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ToggleService } from '../sidebar/toggle.service';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
@@ -9,31 +9,31 @@ import { KeycloakAuthService } from '../../../core/auth/services/keycloak-auth.s
 
 @Component({
     selector: 'app-header',
+    standalone: true, 
     imports: [NgClass, MatMenuModule, MatButtonModule, RouterLink],
     templateUrl: './header.component.html',
     styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-    // isSidebarToggled
+    // Estados de la interfaz
     isSidebarToggled = false;
-
-    // isToggled
     isToggled = false;
+    isSticky = false;
 
+    // Datos del usuario (Keycloak)
     roles = this.keycloakAuthService.getRoles();
-
-    nombreRol = this.roles.map(r =>
-        this.keycloakAuthService.getNombreRol(r)
-    );
-
-    loggedUser = this.keycloakAuthService.getLoggedUser()?.['name'];
+    nombreRol = this.roles.map(r => this.keycloakAuthService.getNombreRol(r));
+    loggedUser = this.keycloakAuthService.getLoggedUser()?.['name'] || 'Usuario';
 
     constructor(
         private toggleService: ToggleService,
         public themeService: CustomizerSettingsService,
         private keycloakAuthService: KeycloakAuthService
-    ) {
+    ) {}
+
+    ngOnInit() {
+        // Suscripciones a estados globales
         this.toggleService.isSidebarToggled$.subscribe(isSidebarToggled => {
             this.isSidebarToggled = isSidebarToggled;
         });
@@ -42,61 +42,33 @@ export class HeaderComponent {
         });
     }
 
-
-
     // Burger Menu Toggle
     toggle() {
         this.toggleService.toggle();
     }
 
-    // Header Sticky
-    isSticky: boolean = false;
-    @HostListener('window:scroll')
-    checkScroll() {
-        const scrollPosition = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        if (scrollPosition >= 50) {
-            this.isSticky = true;
-        } else {
-            this.isSticky = false;
-        }
+    // Header Sticky modernizado
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        // Añade la clase .sticky cuando baja más de 50px
+        this.isSticky = window.scrollY > 50;
     }
 
-    // Dark Mode
+    // Lógica de cambio de tema
     toggleTheme() {
         this.themeService.toggleTheme();
     }
 
-    // Sidebar Dark
-    toggleSidebarTheme() {
-        this.themeService.toggleSidebarTheme();
-    }
-
-    // Right Sidebar
-    toggleRightSidebarTheme() {
-        this.themeService.toggleRightSidebarTheme();
-    }
-
-    // Hide Sidebar
-    toggleHideSidebarTheme() {
-        this.themeService.toggleHideSidebarTheme();
-    }
-
-    // Header Dark Mode
-    toggleHeaderTheme() {
-        this.themeService.toggleHeaderTheme();
-    }
-
-    // Card Border
-    toggleCardBorderTheme() {
-        this.themeService.toggleCardBorderTheme();
-    }
-
-    // RTL Mode
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
-
+    // Lógica de Logout
     logout() {
         this.keycloakAuthService.logout(false);
     }
+
+    // --- Métodos de compatibilidad de plantilla (Se mantienen) ---
+    toggleSidebarTheme() { this.themeService.toggleSidebarTheme(); }
+    toggleRightSidebarTheme() { this.themeService.toggleRightSidebarTheme(); }
+    toggleHideSidebarTheme() { this.themeService.toggleHideSidebarTheme(); }
+    toggleHeaderTheme() { this.themeService.toggleHeaderTheme(); }
+    toggleCardBorderTheme() { this.themeService.toggleCardBorderTheme(); }
+    toggleRTLEnabledTheme() { this.themeService.toggleRTLEnabledTheme(); }
 }

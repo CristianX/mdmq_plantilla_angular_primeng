@@ -1,66 +1,131 @@
 .roles-container {
-    // Las tarjetas azules siempre son azules
-    .bg-siem {
-        background-color: var(--siemColor) !important;
+    /* El padding general lo maneja el layout */
+
+    // --- ESTILO DE CARTAS DE RESUMEN ---
+    .stats-card {
+        background-color: var(--whiteColor);
+        border-radius: 20px;
+        box-shadow: var(--borderBoxShadow);
+        border: 0;
+        padding: 22px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 120px;
+        margin-bottom: 20px;
+
+        .stats-left {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .stats-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .stats-number {
+            font-size: 56px;
+            font-weight: 700;
+            color: #94a3b8;
+            line-height: 1;
+        }
+
+        .stats-icon-badge {
+            width: 74px;
+            height: 74px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--siemColor);
+            flex: 0 0 auto;
+
+            i {
+                font-size: 34px;
+                color: var(--whiteColor);
+            }
+        }
     }
 
-    // Mantener las tarjetas de resumen en el mismo orden/posición
-    // sin importar el ancho de la ventana.
-    .roles-summary {
-        display: grid !important;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 25px;
 
-        // Evita los gutters/márgenes negativos del grid (.row)
-        margin-left: 0;
-        margin-right: 0;
+    .table-header { margin-bottom: 20px; .table-title { font-weight: 700; color: var(--blackColor); } }
+
+    .user-id-badge {
+        background: rgba(71, 85, 105, 0.10);
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-family: monospace;
+        font-weight: 600;
+        color: var(--blackColor);
     }
 
-    // Neutraliza el comportamiento de columnas (col-*) dentro del resumen
-    .roles-summary > [class*="col-"] {
-        width: auto;
-        max-width: none;
-        padding-left: 0;
-        padding-right: 0;
-        min-width: 0;
+    .user-info {
+        display: flex;
+        align-items: center;
+        .user-avatar {
+            width: 30px; height: 30px;
+            background: var(--siemColor); color: white;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 12px; font-weight: bold;
+            margin-right: 10px;
+        }
+        .user-fullname { font-weight: 600; color: var(--blackColor); }
+    }
+
+    .role-pill {
+        display: inline-flex; align-items: center;
+        background: rgba(27, 119, 187, 0.10);
+        color: var(--siemColor);
+        padding: 4px 12px; border-radius: 50px; font-size: 0.85rem; font-weight: 500;
+        i { font-size: 10px; }
+    }
+
+    .status-indicator {
+        font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+        &.is-active { color: #10b981; }
+        &.is-inactive { color: #ef4444; }
+    }
+
+    .manage-btn {
+        border-radius: 8px !important;
+        &:hover { background: rgba(71, 85, 105, 0.06) !important; }
     }
 }
 
-.p-datatable-siem {
-    // Modo Claro (Default)
-    .p-datatable-thead > tr > th {
-        background-color: var(--backgroundColor) !important;
-        color: var(--blackColor) !important;
+.dark-theme, .component-dark-theme {
+    .roles-container {
+        .stats-card {
+            background-color: #1b232d;
+
+            .stats-title { color: rgba(255, 255, 255, 0.92); }
+            .stats-number { color: rgba(255, 255, 255, 0.45); }
+        }
+
+        .table-title { color: white !important; }
+        .user-fullname { color: #e2e8f0 !important; }
+        .user-id-badge { background: #2d3748; color: #cbd5e1; }
+        .role-pill { background: #1e293b; color: #60a5fa; }
     }
+}
 
-    .p-datatable-tbody > tr > td {
-        background-color: var(--whiteColor) !important;
-        color: var(--bodyColor) !important;
-    }
+@media only screen and (max-width: 767px) {
+    .roles-container {
+        .stats-card {
+            min-height: 104px;
+            padding: 18px 18px;
 
-    // Modo Oscuro (según la clase aplicada en admin-page)
-    .dark-theme & {
-        background-color: #1b232d !important;
-
-        .p-datatable-thead > tr > th {
-            background-color: #131920 !important;
-            color: var(--whiteColor) !important;
-        }
-
-        .p-datatable-tbody > tr > td {
-            background-color: #1b232d !important;
-            color: rgba(255, 255, 255, 0.7) !important;
-            border-color: rgba(255, 255, 255, 0.09) !important;
-        }
-
-        // Elimina el fondo blanco de la fila
-        .p-datatable-tbody > tr {
-            background-color: #1b232d !important;
-        }
-
-        .p-paginator {
-            background-color: #1b232d !important;
-            border-color: rgba(255, 255, 255, 0.09) !important;
+            .stats-title { font-size: 24px; }
+            .stats-number { font-size: 44px; }
+            .stats-icon-badge { width: 62px; height: 62px; border-radius: 16px; }
+            .stats-icon-badge i { font-size: 30px; }
         }
     }
 }

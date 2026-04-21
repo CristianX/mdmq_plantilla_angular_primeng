@@ -1,44 +1,35 @@
-.footer-area {
-    padding: 18px 25px;
+::ng-deep {
+    .footer-area {
+        padding: 16px 20px;
+        margin-top: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
 
-    a {
-        color: var(--siemColor);
-
-        &:hover {
-            text-decoration: underline;
+        p {
+            margin: 0;
+            line-height: 1.35;
         }
     }
-    &.card-borderd-theme {
-        box-shadow: var(--borderBoxShadow) !important;
+
+    /* Modo oscuro: mantener el footer legible */
+    .dark-theme {
+        .footer-area {
+            border-color: rgba(255, 255, 255, 0.08);
+        }
     }
 }
 
-/* Max width 767px */
-@media only screen and (max-width : 767px) {
-
-    .footer-area {
-        padding: 15px;
+@media only screen and (max-width: 1199px) {
+    ::ng-deep .footer-area {
+        margin-top: 20px;
     }
-
 }
 
-/* Min width 576px to Max width 767px */
-@media only screen and (min-width : 576px) and (max-width : 767px) {}
-
-/* Min width 768px to Max width 991px */
-@media only screen and (min-width : 768px) and (max-width : 991px) {
-
-    .footer-area {
-        padding: 17px 20px;
+@media only screen and (max-width: 767px) {
+    ::ng-deep .footer-area {
+        padding: 14px 15px;
+        margin-top: 15px;
     }
-
 }
-
-/* Min width 992px to Max width 1199px */
-@media only screen and (min-width : 992px) and (max-width : 1199px) {}
-
-/* Min width 1200px to Max width 1399px */
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {}
-
-/* Min width 1600px */
-@media only screen and (min-width: 1600px) {}

@@ -1,78 +1,94 @@
 <div class="roles-container">
-    <div class="row mb-25 roles-summary">
+    <div class="row mb-25">
         <div class="col-lg-6 col-md-6">
-            <div class="card bg-siem text-white border-radius">
-                <div class="card-body p-md-25">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h3 class="text-white mb-5 fw-bold">{{ totalAdmins }}</h3>
-                            <p class="text-white mb-0 opacity-75">Administradores</p>
-                        </div>
-                        <div class="icon fs-25">
-                            <i class="pi pi-shield"></i>
-                        </div>
-                    </div>
+            <div class="stats-card">
+                <div class="stats-left">
+                    <div class="stats-title">Usuarios</div>
+                    <div class="stats-number">{{ totalUsers }}</div>
+                </div>
+                <div class="stats-icon-badge" aria-hidden="true">
+                    <i class="ri-user-3-line"></i>
                 </div>
             </div>
         </div>
 
         <div class="col-lg-6 col-md-6">
-            <div class="card bg-siem text-white border-radius">
-                <div class="card-body p-md-25">
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div>
-                            <h3 class="text-white mb-5 fw-bold">{{ totalUsers }}</h3>
-                            <p class="text-white mb-0 opacity-75">Usuarios Totales</p>
-                        </div>
-                        <div class="icon fs-25">
-                            <i class="pi pi-users"></i>
-                        </div>
-                    </div>
+            <div class="stats-card">
+                <div class="stats-left">
+                    <div class="stats-title">Administradores</div>
+                    <div class="stats-number">{{ totalAdmins }}</div>
+                </div>
+                <div class="stats-icon-badge" aria-hidden="true">
+                    <i class="ri-admin-line"></i>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card mb-25 border-radius">
-        <div class="card-body">
-            <p-table 
-                [value]="roles" 
-                [loading]="loading" 
-                [paginator]="true" 
-                [rows]="10" 
-                responsiveLayout="scroll"
-                styleClass="p-datatable-siem"
-            >
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Usuario</th>
-                        <th>Nombre de Usuario</th>
-                        <th>Departamento</th>
-                        <th>Roles</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </ng-template>
-
-                <ng-template pTemplate="body" let-role>
-                    <tr>
-                        <td><span class="badge text-soft-siem">{{ role.name }}</span></td>
-                        <td>{{ role.description || 'Sin descripción' }}</td>
-                        <td>{{ role.department || 'N/A' }}</td>
-                        <td>{{ role.roleName || 'Usuario' }}</td>
-                        <td>{{ role.status || 'Activo' }}</td>
-                        <td>
-                            <button pButton icon="pi pi-pencil" class="p-button-text p-button-sm"></button>
-                        </td>
-                    </tr>
-                </ng-template>
-
-                <ng-template pTemplate="emptymessage">
-                    <tr>
-                        <td colspan="6" class="text-center p-4">No hay roles asignados.</td>
-                    </tr>
-                </ng-template>
-            </p-table>
+    <mat-card class="siem-card mb-25 border-radius bg-white d-block">
+        <div class="table-header">
+            <h5 class="table-title">Asignación de Roles y Permisos</h5>
         </div>
-    </div>
+
+        <p-table
+            [value]="roles"
+            [loading]="loading"
+            [paginator]="true"
+            [rows]="10"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-siem"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Identificador</th>
+                    <th>Nombre Completo</th>
+                    <th>Departamento</th>
+                    <th>Rol Actual</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-role>
+                <tr>
+                    <td><span class="user-id-badge">{{ role.username }}</span></td>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar">{{ role.name.charAt(0) }}</div>
+                            <span class="user-fullname">{{ role.name }}</span>
+                        </div>
+                    </td>
+                    <td><span class="text-muted">{{ role.department }}</span></td>
+                    <td>
+                        <span class="role-pill">
+                            <i class="pi pi-briefcase mr-1"></i>
+                            {{ role.roleName }}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <span [class]="'status-indicator ' + (role.status === 'Activo' ? 'is-active' : 'is-inactive')">
+                            {{ role.status || 'Activo' }}
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <button
+                            pButton
+                            label="Gestionar Rol"
+                            icon="pi pi-cog"
+                            class="p-button-outlined p-button-sm manage-btn"
+                            (click)="gestionarRol(role)"
+                        ></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">
+                        No se encontraron registros de personal.
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </mat-card>
 </div>

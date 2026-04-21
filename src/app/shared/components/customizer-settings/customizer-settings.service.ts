@@ -31,29 +31,26 @@ export class CustomizerSettingsService {
     private isRTLEnabledTheme: boolean;
 
     constructor() {
-        // Dark Mode
-        this.isDarkTheme = JSON.parse(localStorage.getItem('isDarkTheme')!);
+        // Defaults seguros (evita JSON.parse(null) y rompe-app en primer arranque)
+        this.isDarkTheme = this.readBool('isDarkTheme', false);
+        this.isSidebarDarkTheme = this.readBool('isSidebarDarkTheme', false);
+        this.isRightSidebarTheme = this.readBool('isRightSidebarTheme', false);
+        this.isHideSidebarTheme = this.readBool('isHideSidebarTheme', false);
+        this.isHeaderDarkTheme = this.readBool('isHeaderDarkTheme', false);
+        this.isCardBorderTheme = this.readBool('isCardBorderTheme', false);
+        this.isCardBorderRadiusTheme = this.readBool('isCardBorderRadiusTheme', false);
+        this.isRTLEnabledTheme = this.readBool('isRTLEnabledTheme', false);
+    }
 
-        // Sidebar Dark Mode
-        this.isSidebarDarkTheme = JSON.parse(localStorage.getItem('isSidebarDarkTheme')!);
-
-        // Right Sidebar
-        this.isRightSidebarTheme = JSON.parse(localStorage.getItem('isRightSidebarTheme')!);
-
-        // Hide Sidebar
-        this.isHideSidebarTheme = JSON.parse(localStorage.getItem('isHideSidebarTheme')!);
-
-        // Header Dark
-        this.isHeaderDarkTheme = JSON.parse(localStorage.getItem('isHeaderDarkTheme')!);
-
-        // Card Border
-        this.isCardBorderTheme = JSON.parse(localStorage.getItem('isCardBorderTheme')!);
-
-        // Card Border Radius
-        this.isCardBorderRadiusTheme = JSON.parse(localStorage.getItem('isCardBorderRadiusTheme')!);
-
-        // RTL Mode
-        this.isRTLEnabledTheme = JSON.parse(localStorage.getItem('isRTLEnabledTheme')!);
+    private readBool(key: string, fallback: boolean): boolean {
+        try {
+            const raw = localStorage.getItem(key);
+            if (raw === null) return fallback;
+            const parsed = JSON.parse(raw);
+            return typeof parsed === 'boolean' ? parsed : fallback;
+        } catch {
+            return fallback;
+        }
     }
 
     // Dark Mode

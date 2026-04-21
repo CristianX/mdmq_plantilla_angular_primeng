@@ -1,19 +1,14 @@
 import { Component, OnInit, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button'; // Falta para los botones de acciones
-import { TooltipModule } from 'primeng/tooltip'; // Útil para iconos
+import { ButtonModule } from 'primeng/button';
 import { UserAdminService } from '../../../../core/services/user-admin.service';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-roles',
   standalone: true,
-  imports: [
-    CommonModule, 
-    TableModule,
-    ButtonModule,
-    TooltipModule
-  ],
+  imports: [CommonModule, TableModule, ButtonModule, MatCardModule],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.scss',
   encapsulation: ViewEncapsulation.None 
@@ -23,40 +18,34 @@ export class RolesComponent implements OnInit {
   
   roles: any[] = [];
   loading: boolean = false;
-  
-  // Variables para los cuadros azules de arriba
   totalAdmins: number = 0; 
   totalUsers: number = 0;
 
   ngOnInit() {
-    this.loadStats();
+    this.totalAdmins = 8; // Valores de ejemplo para las cartas
+    this.totalUsers = 124;
     this.loadRoles();
-  }
-
-  loadStats() {
-    this.totalAdmins = 5; 
-    this.totalUsers = 150;
   }
 
   loadRoles() {
     this.loading = true;
     this.userService.getUsers('').subscribe({
       next: (data: any) => {
-        // Mapeamos los datos para que coincidan con las 6 columnas del HTML
         this.roles = data.map((user: any) => ({
           ...user,
-          name: user.firstName + ' ' + user.lastName,
+          name: `${user.firstName} ${user.lastName}`,
           username: user.username,
-          department: 'Sistemas', // Dato simulado
-          roleName: user.username === 'admin' ? 'Administrador' : 'Operador', // Lógica de ejemplo
-          status: 'Activo' // Dato simulado
+          roleName: user.roleName || 'Sin asignar',
+          department: user.department || 'General',
+          status: user.status || 'Activo'
         }));
         this.loading = false;
       },
-      error: (err: any) => {
-        console.error('Error al cargar roles:', err);
-        this.loading = false;
-      }
+      error: () => this.loading = false
     });
+  }
+
+  gestionarRol(empleado: any) {
+    console.log('Gestionando permisos para:', empleado.username);
   }
 }

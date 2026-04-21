@@ -13,8 +13,7 @@
         }
     }
 
-    /* Modo oscuro: mantener el footer legible */
-    .dark-theme {
+    :host-context(.dark-theme) {
         .footer-area {
             border-color: rgba(255, 255, 255, 0.08);
         }

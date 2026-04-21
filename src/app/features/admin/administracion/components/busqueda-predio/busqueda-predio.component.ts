@@ -55,6 +55,4 @@ export class BusquedaPredioComponent {
     const valor = this.form.get('numeroPredio')?.value;
     this.buscar.emit({ numeroPredio: String(valor ?? '') });
   }
-
-  
 }

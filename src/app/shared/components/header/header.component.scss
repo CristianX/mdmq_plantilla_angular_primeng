@@ -12,7 +12,7 @@
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.1);
 
-        // Transición suave general
+        
         transition: 
             background-color 0.4s ease-in-out, 
             left 0.3s ease, 
@@ -22,13 +22,12 @@
         &.sticky {
             top: 0; left: 0; right: 0;
             border-radius: 0 0 15px 15px;
-            background-color: rgba(30, 58, 138, 0.9) !important;
+            background-color: #1B77BB!important;
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
         }
 
         .header-right-side {
-            // --- ESTILO CÁPSULA (BOTONES DEL HEADER) ---
             .ghost-button {
                 background: rgba(255, 255, 255, 0.15) !important;
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -65,13 +64,11 @@
             }
         }
 
-        // Ajuste estados Sidebar
         &.active, &.hide-sidebar { left: 85px; }
 
         .burger-menu span { background: white !important; }
     }
 
-    // --- MODO OSCURO HEADER ---
     .component-dark-theme .header-area {
         background-color: #1b232d !important;
         border-color: rgba(255, 255, 255, 0.05);
@@ -79,7 +76,7 @@
     }
 }
 
-// --- ESTILOS DE LA "CARTITA" (MAT-MENU) ---
+
 ::ng-deep .modern-profile-menu {
     margin-top: 12px;
     border-radius: 16px !important;
@@ -104,7 +101,7 @@
         }
 
         .user-info {
-            .name { font-size: 15px; color: #1e3a8a; }
+            .name { font-size: 15px; color: #1565c0; }
             .designation { font-size: 12px; }
         }
 
@@ -122,8 +119,8 @@
             }
             &:hover {
                 background-color: #f1f5f9;
-                color: #1e3a8a;
-                .icon-box { background-color: #e2e8f0; i { color: #1e3a8a; } }
+                color: #1565c0;
+                .icon-box { background-color: #e2e8f0; i { color: #1565c0; } }
             }
         }
 
@@ -135,7 +132,7 @@
             &:hover { background-color: #ffe4e6; }
         }
 
-        // Modo Oscuro dentro de la cartita
+
         &.dark-menu {
             background-color: #1b232d !important;
             color: white;

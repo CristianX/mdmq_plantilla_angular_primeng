@@ -27,7 +27,6 @@ import { BusquedaPredioComponent, BusquedaPredioPayload } from '../administracio
   styleUrls: ['./recomendacion.component.scss']
 })
 export class RecomendacionComponent {
-
   form!: UntypedFormGroup;
 
   @ViewChild('stepper') stepper!: MatStepper;

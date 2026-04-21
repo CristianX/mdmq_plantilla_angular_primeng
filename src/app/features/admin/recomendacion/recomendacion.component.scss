@@ -1,13 +1,75 @@
-.mat-mdc-outlined-button.siem {
-  border: 2px solid var(--siemColor);
-  color: var(--siemColor);
-  background-color: white;
-  border-radius: 8px;
-  font-weight: 500;
-  transition: all 0.3s ease;
+app-busqueda-predio {
+  display: block;
+  margin-bottom: 30px; 
+}
 
-  &:hover {
-    background-color: var(--siemColor);
-    color: white;
+.siem-card {
+  overflow: hidden; 
+  border: none;
+  
+  
+  .card-header-blue {
+    background-color: #1B77BB;
+    padding: 20px;
+    margin: 0; 
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    
+    h2 {
+      color: white;
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  
+  .p-24 {
+    padding: 24px;
+  }
+
+  
+  .actions-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f0f0; 
+  }
+
+  .btn-next {
+    padding: 0 40px;
+    height: 45px;
+    font-size: 1rem;
+    border-radius: 6px;
+    background-color: #1B77BB;
+    transition: transform 0.2s;
+
+    &:hover {
+      background-color: #1B77BB;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+:host-context(.dark-theme) {
+  app-busqueda-predio {
+    margin-bottom: 24px;
+  }
+
+  .siem-card {
+    background-color: #1b232d;
+    color: rgba(255, 255, 255, 0.87);
+
+    .card-header-blue {
+      background-color: #1565c0;
+      box-shadow: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .actions-container {
+      border-top-color: rgba(255, 255, 255, 0.08);
+    }
   }
 }

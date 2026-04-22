@@ -15,17 +15,39 @@
             color: var(--blackColor);
         }
 
+        // --- BARRA DE BÚSQUEDA (MODO CLARO) ---
         .search-input {
             width: 300px;
             max-width: 100%;
             border-radius: 8px;
+            background-color: var(--whiteColor); // Fondo blanco en claro
+            color: var(--blackColor);            // Texto negro en claro
             border: 1px solid #dae0ec;
-            transition: width 0.3s ease;
+            padding: 8px 12px;                   // Espaciado interno
+            transition: all 0.3s ease;
+
+            &::placeholder {
+                color: #94a3b8;                  // Color del placeholder
+            }
 
             &:focus {
                 width: 350px;
                 border-color: var(--siemColor);
+                background-color: var(--whiteColor);
+                color: var(--blackColor);
                 box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+                outline: none;
+            }
+        }
+    }
+
+    // --- CORRECCIÓN HOVER TABLA (MODO CLARO) ---
+    table {
+        tbody tr {
+            transition: background-color 0.2s ease;
+            &:hover {
+                // Gris casi imperceptible para resaltar la fila
+                background-color: rgba(0, 0, 0, 0.02) !important;
             }
         }
     }
@@ -100,9 +122,17 @@
     }
 }
 
-// Soporte modo oscuro (para elementos propios del componente)
+// Soporte modo oscuro
 .dark-theme, .component-dark-theme {
     .usuarios-container {
+        // --- CORRECCIÓN HOVER TABLA (MODO OSCURO) ---
+        table tbody tr {
+            &:hover {
+                // Brillo sutil para que no se vea negro ni gris opaco
+                background-color: rgba(255, 255, 255, 0.05) !important;
+            }
+        }
+
         .table-header .table-title { color: var(--whiteColor); }
         .user-info .username-text,
         .full-name { color: rgba(255, 255, 255, 0.87); }

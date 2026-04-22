@@ -6,6 +6,11 @@ app-busqueda-predio {
 .siem-card {
   overflow: hidden; 
   border: none;
+
+  ::ng-deep .mat-step-header .mat-step-icon,
+  ::ng-deep .mat-step-header .mat-step-icon-content {
+    display: none;
+  }
   
   
   .card-header-blue {

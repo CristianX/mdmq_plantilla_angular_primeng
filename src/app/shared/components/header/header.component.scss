@@ -28,18 +28,24 @@
         }
 
         .header-right-side {
+
+            
+        
             .ghost-button {
+                margin-left: 15px !important;
                 background: rgba(255, 255, 255, 0.15) !important;
                 border: 1px solid rgba(255, 255, 255, 0.1) !important;
                 border-radius: 50px !important; // Forma de píldora
                 height: 40px !important;
                 transition: all 0.3s ease !important;
                 display: flex;
+                
                 align-items: center;
 
                 &:hover {
                     background: rgba(255, 255, 255, 0.25) !important;
                     transform: translateY(-1px);
+                    
                 }
 
                 &.icon-only {

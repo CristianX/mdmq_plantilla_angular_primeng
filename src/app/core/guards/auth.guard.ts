@@ -24,21 +24,18 @@ export class AuthGuard extends KeycloakAuthGuard {
         resolve(false);
         return;
       }
+      const requiredRoles: string[] = route.data['roles'] ?? [];
       this.roles = this.keycloakAuthService.getRoles();
+
+      if (requiredRoles.length === 0) {
+        resolve(true);
+        return;
+      }
+
       if (this.roles.length > 0) {
-        const requiredRoles: string[] = route.data['roles'];
-        let granted: boolean = false;
-        if (!requiredRoles || requiredRoles.length === 0) {
-          granted = true;
-        } else {
-          for (const requiredRole of requiredRoles) {
-            if (this.roles.indexOf(requiredRole) > -1) {
-              granted = true;
-              break;
-            }
-          }
-        }
-        if (granted === false) {
+        const granted = requiredRoles.some(requiredRole => this.roles.includes(requiredRole));
+
+        if (!granted) {
           Swal.fire({
             title: '<strong>Sin permiso</strong>',
             icon: 'info',
@@ -49,9 +46,8 @@ export class AuthGuard extends KeycloakAuthGuard {
             confirmButtonText: 'Aceptar'
           })
           this.router.navigate(['']);
-          resolve(granted);
         }
-        // TRUE
+
         resolve(granted);
       } else {
         resolve(false);

@@ -41,13 +41,14 @@ export class KeycloakAuthService {
   redirectToProfile() {
     this.keycloakService.getKeycloakInstance().accountManagement();
   }
-  getRoles() {
-    let roles = this.keycloakService.getKeycloakInstance().resourceAccess
+  getRoles(): string[] {
+    const keycloakInstance = this.keycloakService.getKeycloakInstance();
+    const clientId = environment.keycloakConfig.clientId;
+    const clientRoles = keycloakInstance.resourceAccess?.[clientId]?.roles ?? [];
+    const realmRoles = keycloakInstance.realmAccess?.roles ?? [];
 
-    if (roles![environment.keycloakConfig.clientId]) {
-      return roles![environment.keycloakConfig.clientId].roles;
-    }
-    return []
+    return Array.from(new Set([...clientRoles, ...realmRoles]))
+      .filter((role): role is string => typeof role === 'string' && role.startsWith('ROL_'));
   }
 
   getNombreRol(role: string): string {
